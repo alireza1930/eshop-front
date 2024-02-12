@@ -10,7 +10,6 @@ import {BannerComponent} from "@isc/ui";
   imports: [NxWelcomeComponent, RouterModule, HeaderComponent, FooterComponent, BannerComponent],
   selector: 'isc-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'ngshop';
