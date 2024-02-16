@@ -5,6 +5,7 @@ import {HeaderComponent} from "./shared/header/header.component";
 import {FooterComponent} from "./shared/footer/footer.component";
 import {BannerComponent} from "@isc/ui";
 
+
 @Component({
   standalone: true,
   imports: [NxWelcomeComponent, RouterModule, HeaderComponent, FooterComponent, BannerComponent],
