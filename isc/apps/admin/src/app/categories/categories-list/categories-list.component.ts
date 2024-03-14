@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core"
 import { CardModule } from 'primeng/card'
 import { ToolbarModule } from "primeng/toolbar"
 import { ButtonModule } from "primeng/button"
 import { TableModule } from "primeng/table"
+import { CategoriesService } from "@isc/products"
+import { Category } from "@isc/products"
 
 const UX_MODULE = [CardModule, ToolbarModule, ButtonModule, TableModule]
 
@@ -13,24 +15,17 @@ const UX_MODULE = [CardModule, ToolbarModule, ButtonModule, TableModule]
   templateUrl: './categories-list.component.html',
   styles: ``
 })
-export class CategoriesListComponent {
+export class CategoriesListComponent implements OnInit{
+  categories : Category[] =[];
 
-  categories = [
-    {
-      id: 1,
-      name: "category1",
-      icon: "icon1"
-    },
-    {
-      id: 2,
-      name: "category2",
-      icon: "icon2"
-    },
-    {
-      id: 3,
-      name: "category3",
-      icon: "icon3"
-    }
-  ]
+  constructor(private categoriesService: CategoriesService) {
+  }
+
+  ngOnInit(): void {
+    this.categoriesService.getCategories().subscribe(cats => {
+      this.categories = cats;
+    })
+  }
+
 
 }
