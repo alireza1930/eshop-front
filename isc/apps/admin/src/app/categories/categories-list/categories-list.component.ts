@@ -5,17 +5,20 @@ import { ButtonModule } from "primeng/button"
 import { TableModule } from "primeng/table"
 import { CategoriesService } from "@isc/products"
 import { Category } from "@isc/products"
-import { RouterModule } from "@angular/router"
+import {Router, RouterModule} from "@angular/router"
 import { ConfirmationService, MessageService } from "primeng/api"
 import { ToastModule } from "primeng/toast"
 import { ConfirmDialogModule } from "primeng/confirmdialog"
+import {ColorPickerModule} from "primeng/colorpicker";
+import {FormsModule} from "@angular/forms";
+import {NgClass} from "@angular/common";
 
 const UX_MODULE = [CardModule, ToolbarModule, ButtonModule, TableModule, RouterModule, ToastModule, ConfirmDialogModule]
 
 @Component({
   selector: "isc-categories-list",
   standalone: true,
-  imports: [UX_MODULE],
+  imports: [UX_MODULE, ColorPickerModule, FormsModule, NgClass],
   templateUrl: "./categories-list.component.html",
   styles: ``
 })
@@ -24,7 +27,8 @@ export class CategoriesListComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService,
               private messageService: MessageService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,7 +36,6 @@ export class CategoriesListComponent implements OnInit {
   }
 
   deleteCategory(categoryId: string) {
-
     this.confirmationService.confirm({
       message: "Do you want to Delete this Category?",
       header: "Delete Category",
@@ -63,5 +66,9 @@ export class CategoriesListComponent implements OnInit {
     this.categoriesService.getCategories().subscribe(cats => {
       this.categories = cats;
     })
+  }
+
+  updateCategory(categoryId: string) {
+    this.router.navigateByUrl(`categories/form/${categoryId}`);
   }
 }
