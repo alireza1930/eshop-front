@@ -3,7 +3,7 @@ import { CardModule } from "primeng/card"
 import { ToolbarModule } from "primeng/toolbar"
 import { ButtonModule } from "primeng/button"
 import { TableModule } from "primeng/table"
-import { RouterModule } from "@angular/router"
+import { Router, RouterModule } from "@angular/router"
 import { ToastModule } from "primeng/toast"
 import { ConfirmDialogModule } from "primeng/confirmdialog"
 import { Product, ProductsService } from "@isc/products"
@@ -24,7 +24,8 @@ export class ProductsListComponent implements OnInit {
 
   products: Product[] = [];
 
-  constructor(private productsService: ProductsService) {
+  constructor(private productsService: ProductsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   updateProduct(id: string) {
-
+    this.router.navigateByUrl(`products/form/${id}`);
   }
 
   private _getProducts() {
