@@ -13,12 +13,13 @@ import {ColorPickerModule} from "primeng/colorpicker";
 import {FormsModule} from "@angular/forms";
 import {NgClass} from "@angular/common";
 
-const UX_MODULE = [CardModule, ToolbarModule, ButtonModule, TableModule, RouterModule, ToastModule, ConfirmDialogModule]
+const UX_MODULE = [CardModule, ToolbarModule, ButtonModule, TableModule, RouterModule, ToastModule,
+  ConfirmDialogModule, ColorPickerModule, FormsModule, NgClass]
 
 @Component({
   selector: "isc-categories-list",
   standalone: true,
-  imports: [UX_MODULE, ColorPickerModule, FormsModule, NgClass],
+  imports: [UX_MODULE],
   templateUrl: "./categories-list.component.html",
   styles: ``
 })
