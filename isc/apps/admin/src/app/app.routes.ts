@@ -1,21 +1,23 @@
-import { Route } from '@angular/router'
-import { ShellComponent } from './shared/shell/shell.component'
-import { DashboardComponent } from './dashboard/dashboard.component'
-import { CategoriesListComponent } from './categories/categories-list/categories-list.component'
-import { CategoriesFormComponent } from "./categories/categories-form/categories-form.component"
-import { ProductsListComponent } from "./pages/products/products-list/products-list.component"
-import { ProductsFormComponent } from "./pages/products/products-form/products-form.component"
+import {Route} from '@angular/router'
+import {ShellComponent} from './shared/shell/shell.component'
+import {DashboardComponent} from './dashboard/dashboard.component'
+import {CategoriesListComponent} from './categories/categories-list/categories-list.component'
+import {CategoriesFormComponent} from "./categories/categories-form/categories-form.component"
+import {ProductsListComponent} from "./pages/products/products-list/products-list.component"
+import {ProductsFormComponent} from "./pages/products/products-form/products-form.component"
 import {UsersListComponent} from "./pages/users/users-list/users-list.component";
 import {UsersFormComponent} from "./pages/users/users-form/users-form.component";
 import {OrdersListComponent} from "./pages/orders/orders-list/orders-list.component";
 import {OrdersDetailComponent} from "./pages/orders/orders-detail/orders-detail.component";
 import {LoginComponent} from "../../../../users/src/lib/pages/login/login.component";
+import {AuthGuard} from "@isc/users";
 
 
 export const appRoutes: Route[] = [
   {
-    path:'',
+    path: '',
     component: ShellComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -66,10 +68,12 @@ export const appRoutes: Route[] = [
         path: 'orders/:id',
         component: OrdersDetailComponent
       },
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-    ]
-  }
+
+    ],
+
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
 ]
