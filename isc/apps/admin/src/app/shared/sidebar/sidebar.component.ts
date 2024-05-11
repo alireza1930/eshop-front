@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {AuthService} from "@isc/users";
 @Component({
   selector: 'admin-sidebar',
   standalone: true,
@@ -8,4 +9,10 @@ import { RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
 
+  constructor(private authService: AuthService) {
+
+  }
+  logoutUser() {
+    this.authService.logout();
+  }
 }

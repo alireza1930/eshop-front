@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http"
 import { Category } from "../models/category"
-import { Observable } from "rxjs"
+import {map, Observable} from "rxjs"
 import {environment} from "../../../../environments/environment";
 import { Product } from "../models/product"
 
@@ -32,5 +32,11 @@ export class ProductsService {
 
   deleteProduct(productId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiURLProducts}/${productId}`);
+  }
+
+  getProductsCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiURLProducts}/get/count`)
+      .pipe(map((objectValue: any) => objectValue.productCount));
   }
 }
