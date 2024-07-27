@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http"
-import { Category } from "../models/category"
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http"
+import {Category} from "../models/category"
 import {map, Observable} from "rxjs"
 import {environment} from "../../../../environments/environment";
-import { Product } from "../models/product"
+import {Product} from "../models/product"
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class ProductsService {
 
   apiURLProducts = environment.apiUrl + 'products';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURLProducts);
@@ -38,5 +39,9 @@ export class ProductsService {
     return this.http
       .get<number>(`${this.apiURLProducts}/get/count`)
       .pipe(map((objectValue: any) => objectValue.productCount));
+  }
+
+  getFeaturedProducts(count: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiURLProducts}/get/featured/${count}`);
   }
 }
