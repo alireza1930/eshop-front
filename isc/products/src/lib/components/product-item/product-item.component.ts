@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../../models/product';
-import {NgIf} from "@angular/common";
+import {Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef} from '@angular/core';
+import {Product} from '../../models/product';
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {ButtonModule} from "primeng/button";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'products-product-item',
@@ -9,14 +10,22 @@ import {ButtonModule} from "primeng/button";
   standalone: true,
   imports: [
     NgIf,
-    ButtonModule
+    ButtonModule,
+    RouterLink,
+    NgOptimizedImage
   ],
   styles: []
 })
 export class ProductItemComponent implements OnInit {
   @Input() product?: Product;
 
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(private _cd: ChangeDetectorRef) {
+  }
+
+  ngOnInit(): void {
+  }
+
+
+  protected readonly String = String;
 }

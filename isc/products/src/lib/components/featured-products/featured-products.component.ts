@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../services/products.service';
 import {ProductItemComponent} from "../product-item/product-item.component";
-import {NgForOf} from "@angular/common";
+import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'products-featured-products',
@@ -12,7 +12,9 @@ import {NgForOf} from "@angular/common";
   standalone: true,
   imports: [
     ProductItemComponent,
-    NgForOf
+    NgForOf,
+    KeyValuePipe,
+    NgIf
   ],
   styles: []
 })
@@ -36,8 +38,8 @@ export class FeaturedProductsComponent implements OnInit, OnDestroy {
     this.prodService
       .getFeaturedProducts(4)
       .pipe(takeUntil(this.endSubs$))
-      .subscribe((products: any) => {
-        this.featuredProducts = products;
+      .subscribe((res: any) => {
+        this.featuredProducts = res?.products;
       });
   }
 }
