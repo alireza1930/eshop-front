@@ -11,6 +11,8 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {GalleryComponent} from "../../../../../ui/src/lib/ui/components/gallery/gallery.component";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
+import {CartService} from "../../../../../orders/src/lib/services/cart.service";
+import {CartItem} from "../../../../../orders/src/lib/models/cart";
 
 @Component({
   selector: 'products-product-page',
@@ -31,9 +33,11 @@ import {RippleModule} from "primeng/ripple";
 export class ProductPageComponent implements OnInit, OnDestroy {
   product?: Product;
   endSubs$: Subject<any> = new Subject();
-  quantity?: number;
+  quantity?: number = 1;
 
-  constructor(private prodService: ProductsService, private route: ActivatedRoute) {}
+  constructor(private prodService: ProductsService,
+              private route: ActivatedRoute,
+              private cartService: CartService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -49,7 +53,13 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     this.endSubs$.complete();
   }
 
-  addProductToCart() {}
+  addProductToCart() {
+    const cartItem: CartItem = {
+      productId: this.product?.id,
+      quantity: this.quantity
+    }
+    this.cartService.setCartItem(cartItem);
+  }
 
   private _getProduct(id: string) {
     this.prodService
