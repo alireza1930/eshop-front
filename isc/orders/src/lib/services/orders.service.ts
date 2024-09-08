@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Order} from '../models/order';
 import {environment} from "../../../../environments/environment";
+import {Product} from "@isc/products";
 
 
 @Injectable({
@@ -10,6 +11,7 @@ import {environment} from "../../../../environments/environment";
 })
 export class OrdersService {
   apiURLOrders = environment.apiUrl + 'orders';
+  apiURLProducts = environment.apiUrl + 'products';
 
   constructor(private http: HttpClient) {
   }
@@ -45,4 +47,8 @@ export class OrdersService {
       .get<number>(`${this.apiURLOrders}/get/totalsales`)
       .pipe(map((objectValue: any) => objectValue.totalsales));
   }
+  getProduct(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiURLProducts}/${productId}`);
+  }
+
 }
